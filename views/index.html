@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.1/vue-resource.min.js"></script>
+    <title>Node Chat</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://use.fontawesome.com/7ce95a0526.js"></script>
+  </head>
+  <body>
+    <form method="post" action="/enviar_mensagem">
+    <h2>Node Chat</h2>
+    <input type="text" name="nome" placeholder="Digite seu nome" autofocus/><br>
+    <input type="text" name="mensagem" placeholder="Digite uma mensagem"/><br>
+    <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar</button>
+  </form>
+  <div id ="lista">
+    <h2>Mural de Mensagens </h2>
+    <div v-for="msg in mensagens" class="mensagem">
+      <b>{{msg.nome}}:</b> {{msg.mensagem}}
+    </div><br>
+    <button type="button" v-on:click="atualizarListaDeMensagens()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>
+  </div>
+  </body>
+  <script>
+  new Vue({
+    el: '#lista',
+    data: {
+      mensagens: []
+    },
+    methods:{
+      atualizarListaDeMensagens: function(){
+          this.mensagens = []
+          var self = this
+          this.$http.get('/listar_mensagens').then(function(listaDeMensagens){
+            self.mensagens = listaDeMensagens.body;
+            console.log(listaDeMensagens.body);
+          });
+      }
+    },
+    created: function(){
+      this.atualizarListaDeMensagens();
+    }
+  })
+
+  </script>
+</html>

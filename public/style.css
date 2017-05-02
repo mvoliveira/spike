@@ -1,0 +1,43 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: #212121;
+  text-align: center;
+}
+
+input {
+  border: 1px solid #FFF;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #2196F3;
+  border: 1px solid #2196F3;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: none;
+}
+
+.mensagem {
+  background-color: #404040;
+  margin: auto;
+  margin-bottom: 10px;
+  width: 500px;
+}
+
+body, button {
+  color: #FFF;
+}
+
+input, button, .mensagem {
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 10px;
+}
