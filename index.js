@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 var path = require('path')
 var app = express()
 var MongoClient = require('mongodb').MongoClient
-var urlConexaoBancoDeDados = "mongodb://10.96.127.78:27017/test"
+var urlConexaoBancoDeDados = "mongodb://10.96.127.72:27017/test"
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -18,7 +18,7 @@ app.get('/listar_mensagens', function (requisicao, resposta) {
             var collection = db.collection('chat');
             collection.find().toArray(function(err, items) {
                 resposta.setHeader('Content-Type', 'application/json');
-                resposta.send(JSON.stringify(items));
+                resposta.send(JSON.stringify(items.reverse()));
             });
         }
         else{

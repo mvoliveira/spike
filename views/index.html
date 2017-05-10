@@ -32,7 +32,6 @@
     },
     methods:{
       atualizarListaDeMensagens: function(){
-          this.mensagens = []
           var self = this
           this.$http.get('/listar_mensagens').then(function(listaDeMensagens){
             self.mensagens = listaDeMensagens.body;
@@ -42,6 +41,8 @@
     },
     created: function(){
       this.atualizarListaDeMensagens();
+      var self = this
+      setInterval(function(){self.atualizarListaDeMensagens();},5000)
     }
   })
 
